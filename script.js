@@ -41,7 +41,7 @@ function iniciarTablero() {
             html += "<div id='cell-" + (i+1) + "-" + (j+1) + "' class='casilla casilla-hueco' style='grid-column:" + (j + 2) + "/" + (j+3) + "; grid-row:" + (i + 1) + "/" + (i + 2) + ";'>&nbsp;</div>";
         }
     }
-    document.getElementById('tablero').innerHTML = html;
+    tablero.innerHTML = html;
 }
 
 function colocarBarcos() {
@@ -65,12 +65,12 @@ function colocarBarcos() {
                 let f = filaIni;
                 let c = celdaIni;
 
-                if (orient == 'h') {
-                    c = celdaIni + j;
-                } else {
+                if (orient == 'v') {
                     f = filaIni + j;
+                } else {
+                    c = celdaIni + j;
                 }
-
+                
                 let celdaDOM = getCell(f, c);
                 if (!celdaDOM || celdaDOM.classList.contains('barco')) {
                     valido = false;
@@ -81,8 +81,7 @@ function colocarBarcos() {
 
             if (valido) {
                 for (let k = 0; k < celdasData.length; k++) {
-                    let celdaDOM = document.getElementById(celdasData[k]);
-                    celdaDOM.classList.add('barco'); // marcar como barco (oculto)
+                    document.getElementById(celdasData[k]).classList.add('barco');
                 }
 
                 barcos.push({
@@ -91,7 +90,6 @@ function colocarBarcos() {
                     celdas: celdasData,
                     tocadas: []
                 });
-
                 colocado = true;
             }
         }
@@ -103,10 +101,27 @@ function eventoTocar() {
     for (let i = 0; i < casillasEvt.length; i++) {
         let casilla = casillasEvt[i];
         casilla.addEventListener('click', function() {
+
+            if (casilla.classList.contains('marcada')) return;
+            casilla.classList.add('marcada');
+
             if (casilla.classList.contains('barco')) {
-                casilla.style.background = 'red';
+                casilla.style.background = '#FF6676';
+
+                for (let j = 0; j < barcos.length; j++) {
+                    let b = barcos[j];
+                    for (let k = 0; k < b.celdas.length; k++) {
+                        if (b.celdas[k] == casilla.id) {
+                            b.tocadas.push(casilla.id);
+                            if (b.tocadas.length == b.tamaño) {
+                                inputs[b.tamaño].checked = true;
+                            }
+                            break;
+                        }
+                    }
+                }
             } else {
-                casilla.style.background = 'gray';
+                casilla.style.background = '#D3D3D3';
             }
         });
     }
