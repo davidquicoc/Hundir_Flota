@@ -7,6 +7,8 @@ var barcos = [];
 
 const tablero = document.getElementById('tablero');
 
+var casillasTocadas = 0;
+
 const inputs = {
     1: document.getElementById('check1b'),
     2: document.getElementById('check2b'),
@@ -19,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     iniciarTablero();
     colocarBarcos();
     eventoTocar();
+    document.getElementById('restart').addEventListener('click', reiniciarJuego);
 });
 
 function iniciarTablero() {
@@ -98,6 +101,7 @@ function colocarBarcos() {
 
 function eventoTocar() {
     const casillasEvt = document.querySelectorAll('.casilla-hueco');
+    
     for (let i = 0; i < casillasEvt.length; i++) {
         let casilla = casillasEvt[i];
         casilla.addEventListener('click', function() {
@@ -105,8 +109,10 @@ function eventoTocar() {
             if (casilla.classList.contains('marcada')) return;
             casilla.classList.add('marcada');
 
+            casillasTocadas++;
+
             if (casilla.classList.contains('barco')) {
-                casilla.style.background = '#FF6676';
+                casilla.style.background = '#ff667579';
 
                 for (let j = 0; j < barcos.length; j++) {
                     let b = barcos[j];
@@ -115,13 +121,14 @@ function eventoTocar() {
                             b.tocadas.push(casilla.id);
                             if (b.tocadas.length == b.tamaño) {
                                 inputs[b.tamaño].checked = true;
+                                comprobarVictoria();
                             }
                             break;
                         }
                     }
                 }
             } else {
-                casilla.style.background = '#D3D3D3';
+                casilla.style.background = '#3a6fa879';
             }
         });
     }
@@ -131,6 +138,27 @@ function getCell(fila, celda) {
     return document.getElementById("cell-" + fila + "-" + celda);
 }
 
-document.getElementById('restart').addEventListener('click', function() {
+function comprobarVictoria() {
+    let todosHundidos = true;
+    
+    for (let i = 1; i <= 5; i++) {
+        if (inputs[i].checked == false) {
+            todosHundidos = false;
+            break;
+        }
+    }
+
+    if (todosHundidos) {
+        setTimeout(function() {
+            alert("¡Felicidades! Has hundido toda la flota.\nNº de casillas tocadas: " + casillasTocadas);
+            let verificacion = confirm("¿Quieres jugar de nuevo?");
+            if (verificacion) {
+                reiniciarJuego();
+            }
+        }, 200);
+    }
+}
+
+function reiniciarJuego() {
     window.location.href = './index.html';
-});
+}

@@ -1,5 +1,5 @@
 /* Google fonts */
-@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 * {
     margin: 0;
@@ -13,28 +13,42 @@ html {
 }
 
 body, button {
-    font-family: "Google Sans Flex", sans-serif;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
 }
 
 .container {
     display: flex;
     flex-direction: column;
-    padding: 35px;
+    padding: 20px;
     align-items: center;
     justify-content: center;
+    border: 1px solid #000000;
+    box-shadow: 0 0 15px #0000004b;
+    border-radius: 10px;
 }
 
 .container h2 {
+    color: #ffd374;
     font-size: 2.4rem;
-    margin: 10px 0;
+    margin: 15px 0;
+    text-decoration: underline;
 }
 
 .container p {
     font-size: 1.5rem;
-    margin: 5px 0;
+    margin: 2.5px 0;
 }
 
 .box-check {
+    margin: 5px 0;
     display: grid;
     grid-template-columns: repeat(5, 125px);
     grid-template-rows: repeat(2, 40px);
@@ -71,10 +85,6 @@ body, button {
     grid-column: 5/6;
 }
 
-input {
-    transform: scale(1.5);
-}
-
 #check5b {
     grid-row: 2/3;
     grid-column: 1/2;
@@ -100,16 +110,15 @@ input {
     grid-column: 5/6;
 }
 
-
 #tablero {
     display: grid;
     grid-template-columns: repeat(11, 50px);
     grid-template-columns: repeat(11, 50px);
-    background: #e5e5e5;
-    border: 1px solid #353535;
+    background: #ffcd8178;
+    border: 1px solid #fdb54a;
     gap: 3.5px;
     padding: 3.5px;
-    margin: 20px 0;
+    margin: 15px 0;
 }
 
 .casilla {
@@ -120,46 +129,60 @@ input {
     padding: 10px;
 }
 
-.casilla-simb {
-    background: #e7b882;
+.casilla-simb, .casilla-vacia {
+    background: #edb15879;
+    /*background: #f1b04f;*/
+    color: #ffffff;
 }
 
-.casilla-vacia {
-    background: #e7b88277;
-}
-
-.casilla-hueco {
+.casilla-hueco, .barco {
     cursor: pointer;
-    background: #5ba0cf;
+    background: #ffffffb0;
+    border: 1px solid #83838300;
     transition: 0.4s;
 }
 
-.casilla-hueco:hover {
-    background: #34438f;
+.casilla-hueco:hover, .barco:hover {
+    background: #f9f9f9f9;
+    border: 1px solid #383838;
 }
 
-.barco {
-    background: #5ba0cf;
+.marcada:hover {
+    cursor: pointer;
+    border: none;
 }
 
 .button-restart {
-    margin: 10px 0;
+    margin: 6.3px 0;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+input[type="checkbox"] {
+    pointer-events: none;
+    accent-color: #ff5757;
+    transform: scale(1.25);
+}
+
 button {
-    padding: 10px 20px;
-    background: #d3d3d372;
+    margin: 0;
+    padding: 10px;
+    background: #ffd7a3;
     cursor: pointer;
-    border: 1px solid #00000000;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fafafa;
+    border: 0px solid #ffd7a300;
     transition: 0.4s;
     font-size: 1.4rem;
     width: 100%;
+    border-radius: 0;
 }
 
 button:hover {
-    background: #ebe3c1;
-    border: 1px solid #303030;
+    background: #cb842088;
+    border: 2px solid #ffd7a3;
+    border-radius: 10px;
+    color: #0f0f0fa2;
 }
