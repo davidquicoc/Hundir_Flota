@@ -4,12 +4,12 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Asegura que le padding o afecte al ancho total */
     -webkit-box-sizing: border-box;
 }
 
 html {
-    font-size: 62.5%;   /* 1rem = 16px */
+    font-size: 62.5%;   /* 1rem sea igual a 10px */
     width: 100vw;
     height: 100vh;
 }
@@ -21,11 +21,12 @@ body, button {
 body {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center;    /* Cnetra el juego en pantalla */
     width: 100%;
     height: 100%;
 }
 
+/* CONTENEDOR PRINCIPAL */
 .container {
     display: flex;
     flex-direction: column;
@@ -49,6 +50,7 @@ body {
     font-size: 1.5rem;
 }
 
+/* INDICADORES DE BARCOS */
 .box-check {
     gap: 10px;
     display: grid;
@@ -59,6 +61,7 @@ body {
     text-align: center;
 }
 
+/* POSICIONAMIENTO INDIVIDUAL */
 .box-check p {
     font-size: 1.41rem;
 }
@@ -113,6 +116,7 @@ body {
     grid-column: 5/6;
 }
 
+/* TABLERO */
 #tablero {
     display: grid;
     grid-template-columns: repeat(11, 50px);
@@ -123,6 +127,7 @@ body {
     padding: 3.5px;
 }
 
+/* ESTILO DE LAS CASILLAS */
 .casilla {
     width: 100%;
     height: 100%;
@@ -131,11 +136,13 @@ body {
     padding: 10px;
 }
 
+/* Casillas de A-J y 1-10 */
 .casilla-simb, .casilla-vacia {
     background: #edb15879;
     color: #ffffff;
 }
 
+/* Casillas donde el usuario hará click */
 .casilla-hueco, .barco {
     cursor: pointer;
     background: #ffffffb0;
@@ -148,6 +155,7 @@ body {
     border: 1px solid #383838;
 }
 
+/* Estado marcado */
 .marcada:hover {
     cursor: auto;
     border: none;
@@ -166,6 +174,7 @@ input[type="checkbox"] {
     transform: scale(1.5);
 }
 
+/* BOTÓN DE REINICIO */
 button {
     padding: 10px;
     background: #ffd7a3;
@@ -187,6 +196,8 @@ button:hover {
     color: #0f0f0fa2;
 }
 
+/* RESPONSIVE */
+/* Vista de tablets*/
 @media (max-width: 863px) {
     .container {
         width: 100vw;
@@ -196,7 +207,7 @@ button:hover {
     }
 
     .container h2 {
-        display: none;
+        display: none;  /* Hacer no visible el encabezado */
     }
 
     .button-restart {
@@ -273,29 +284,34 @@ button:hover {
 
     #tablero {
         order: 2;
+        /* Ajuste de tamaño de celdas para que quepan en pantallas medianas */
         grid-template-columns: repeat(11, minmax(0, 40px));
         padding: 1.5px;
         gap: 2px;
     }
 }
 
+/* Vista móvil */
 @media (max-width: 576px) {
     .container {
         flex-direction: column;
-        width: 100vw;
-        height: 100vh;
+        width: 100%;
+        height: 100%;
+        border: none;   /* Quitar bordes */
+        box-shadow: none;   /* QUitar sombreado */
     }
 
     .container h2 {
-        display: block;
+        display: block; /* Hacer el encabezado visible para vista móvil */
         font-size: 1.87rem;
         order: 1;
     }
 
     .box-check {
+        width: 100%;
         order: 2;
         grid-template-rows: 45px 20px;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(5, minmax(0, 1fr));
         border-radius: 8px;
     }
 
@@ -371,7 +387,7 @@ button:hover {
     }
 
     .button-restart {
-        display: none;
+        display: none;  /* Hacer no visible el .button-restart para vista móvil */
     }    
 }
 
