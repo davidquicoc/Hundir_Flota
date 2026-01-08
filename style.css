@@ -4,14 +4,14 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Asegura que le padding o afecte al ancho total */
+    box-sizing: border-box; /* Asegura que padding o afecte al ancho total */
     -webkit-box-sizing: border-box;
 }
 
 html {
-    font-size: 62.5%;   /* 1rem sea igual a 10px */
-    width: 100vw;
-    height: 100vh;
+    font-size: 62.5%;   /* 1rem = 10px */
+    width: 100%;
+    height: 100%;
 }
 
 body, button {
@@ -20,10 +20,9 @@ body, button {
 
 body {
     display: flex;
+    padding: 40px;
     align-items: center;
-    justify-content: center;    /* Cnetra el juego en pantalla */
-    width: 100%;
-    height: 100%;
+    justify-content: center;
 }
 
 /* CONTENEDOR PRINCIPAL */
@@ -199,11 +198,16 @@ button:hover {
 /* RESPONSIVE */
 /* Vista de tablets*/
 @media (max-width: 863px) {
+    body {
+        height: 100%;
+        width: 100%;
+        padding: 12px;
+    }
+
     .container {
-        width: 100vw;
-        height: 100vh;
         flex-direction: row;
         gap: 10px;
+        padding: 20px;
     }
 
     .container h2 {
@@ -293,8 +297,13 @@ button:hover {
 
 /* Vista móvil */
 @media (max-width: 576px) {
+    body {
+        padding: 0;
+    }
+
     .container {
         flex-direction: column;
+        margin: 0;
         width: 100%;
         height: 100%;
         border: none;   /* Quitar bordes */
@@ -390,4 +399,3 @@ button:hover {
         display: none;  /* Hacer no visible el .button-restart para vista móvil */
     }    
 }
-
